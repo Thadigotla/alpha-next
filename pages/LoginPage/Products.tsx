@@ -159,7 +159,8 @@ export interface Item {
 
     setPromo(true);
     const response = await fetch(
-      "http://localhost:3000/api/checkpromo",
+      "/api/checkpromo",
+      // "http://localhost:3000/api/checkpromo",
       // "https://7yq72fujgvbpoc7222wdztdhrq0qgrlz.lambda-url.us-east-1.on.aws/",
       {
         method: "POST",
@@ -246,7 +247,8 @@ export interface Item {
       // Call your backend to create the Checkout Session
       const response = await fetch(
         // "http://localhost:4000/api/session",
-        "http://localhost:3000/api/session",
+        "/api/session",
+        // "http://localhost:3000/api/session",
 
         // "https://ftql6xrbueq5gpygsqnsa6trw40rckpa.lambda-url.us-east-1.on.aws/",
         {
