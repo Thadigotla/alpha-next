@@ -2,7 +2,6 @@ import { Col, Form, Image, Row, Spin, Input, Card } from "@pankod/refine-antd";
 import { useLogin, useNavigation } from "@pankod/refine-core";
 import React, { useEffect, useState } from "react";
  import { Cart } from "./Cart";
-import { Products } from "./Products";
 import { Navbar } from "./Navbar";
 import { Button, Collapse, Select } from "antd";
  import { NhostClient } from "@nhost/nhost-js";
