@@ -6,7 +6,7 @@ const checkpromo = async (req, res) => {
 
   const { coupon_name } = req.body;
 
-  const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
+  const stripeInstance = stripe("sk_test_51MhnQJSG1kawF0cmcJ7aHuOic23iOFNbJOFfbZRz9Ac6KOGge98uSe9RERjMUMrZ8U7AOzqv088sqCRZl4uT0EEG000uFyqDOP");
 
 
   try {

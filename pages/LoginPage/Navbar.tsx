@@ -140,7 +140,7 @@ export const Navbar: React.FC<INavbar> = ({ showDrawer, itemsCount }) => {
           className="nav-links"
           style={{ display: "flex", justifyContent: "space-evenly" }}
         >
-          <Button onClick={() => push("/LoginPage/product")} type="link">
+          {/* <Button onClick={() => push("/LoginPage/product")} type="link">
             Product
           </Button>
 
@@ -157,16 +157,16 @@ export const Navbar: React.FC<INavbar> = ({ showDrawer, itemsCount }) => {
 
           <Button onClick={() => push("/LoginPage/contact")} type="link">
             Contact
-          </Button>
-          <Dropdown menu={{ items }}>
+          </Button> */}
+          {/* <Dropdown menu={{ items }}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>What We Do ?</Space>
             </a>
-          </Dropdown>
-
+          </Dropdown> */}
+{/* 
           <Button onClick={() => push("/LoginPage/manage")} type="link">
             Manage
-          </Button>
+          </Button> */}
 
           {userDetails ? (
             <Button
@@ -194,7 +194,7 @@ export const Navbar: React.FC<INavbar> = ({ showDrawer, itemsCount }) => {
               size="large"
               icon={
                 <Badge count={itemsCount} color="blue">
-                  <CartLogo />
+                  {/* <CartLogo /> */}
                 </Badge>
               }
               type="primary"

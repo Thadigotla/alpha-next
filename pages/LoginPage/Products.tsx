@@ -245,8 +245,10 @@ export interface Item {
 
       // Call your backend to create the Checkout Session
       const response = await fetch(
-        // "http://localhost:4000/create-checkout-session",
-        "https://ftql6xrbueq5gpygsqnsa6trw40rckpa.lambda-url.us-east-1.on.aws/",
+        // "http://localhost:4000/api/session",
+        "http://localhost:3000/api/session",
+
+        // "https://ftql6xrbueq5gpygsqnsa6trw40rckpa.lambda-url.us-east-1.on.aws/",
         {
           method: "POST",
           body: JSON.stringify({
@@ -299,9 +301,9 @@ export interface Item {
 
   return (
     <>
-      <Navbar showDrawer={showDrawer} itemsCount={totalCount}></Navbar>
+      <Navbar showDrawer={showDrawer} itemsCount={totalCount}/>
       {/* for warning */}
-      {contextHolder}
+      {/* {contextHolder} */}
 
       <Drawer title="Cart" placement="right" onClose={onClose} open={open}>
         <Space direction="vertical">
@@ -309,8 +311,7 @@ export interface Item {
           {cartItems.map((item) => (
             <div key={item.id}>
               <Row className="cart-item">
-                {/* {item.name} - &#163;{item.cost} x {item.quantity} = &#163;
-                {item.cost * item.quantity} */}
+ 
                 <Col span={4} className="cart-item-image">
                   <Image src={item.image_url} height={40} alt="image" />
                 </Col>
@@ -390,60 +391,9 @@ export interface Item {
 
       <div className="products-list">
         <Row>
-          {/* <Col
-            // span={6}
-            className="product-cart"
-            style={{ fontSize: "1.2em" }}
-            md={8}
-            lg={8}
-            sm={24}
-            xs={24}
-          >
-            <Space direction="vertical">
-              <h2>Cart</h2>
-              {cartItems.length === 0 && <p>Your cart is empty.</p>}
-              {cartItems.map((item) => (
-                <div key={item.id}>
-                  <p className="cart-item">
-                    {item.name} - &#163;{item.cost} x {item.quantity} = &#163;
-                    {item.cost * item.quantity}
-                  </p>
-                  <Button onClick={() => removeItem(item)}>
-                    Remove from cart
-                  </Button>
-                </div>
-              ))}
-              {cartItems.length > 0 && (
-                <div>
-                  <p>
-                    Total price: <strong>&#163;{totalPrice.toFixed(2)}</strong>
-                  </p>
-                </div>
-              )}
-              <Space>
-                <Button onClick={() => setCartItems([])}>Clear cart</Button>
-
-                <Button type="primary" onClick={showModal}>
-                  Checkout
-                </Button>
-                <StripeCheckoutComponent
-                  totalPrice={totalPrice}
-                  couponDetails={Coupon_Code}
-                  cartItems={cartItems}
-                />
-
-                <Formats />
-              </Space>
-              <Input onChange={(e) => setCoupon(e?.target?.value)} />
-
-              <Button type="primary" onClick={checkPromo}>
-                Apply Promo
-              </Button>
-            </Space>
-          </Col> */}
+ 
           <Col md={18} lg={18} sm={24} xs={24}>
-            {/* <Product key={product.id} product={product}></Product> */}
-            {productsList?.map((product) => (
+             {productsList?.map((product) => (
               <section className="product-container">
                 <Row>
                   <Col span={8} className="product-image">
@@ -456,22 +406,13 @@ export interface Item {
                     <div className="product-price">&#163; {product.cost}</div>
                     <div className="product-quantity">
                       <span style={{ paddingRight: "10px" }}>
-                        Quantity :{" "}
-                        {
+                        Quantity :
+                        {/* {
                           cartItems.find((item) => item.id === product.id)
                             ?.quantity
-                        }
-                      </span>{" "}
-                      {/* <InputNumber
-                        onStep={(a, action) => {
-                          if (action.type === "up") {
-                            addItem(product);
-                          } else if (action.type === "down") {
-                            removeItem(product);
-                          }
-                        }}
-                        min={0}
-                      ></InputNumber> */}
+                        } */}
+                      </span>
+ 
                     </div>
                     <div className="buttons">
                       <Space>
@@ -489,7 +430,6 @@ export interface Item {
                         >
                           Remove
                         </Button>
-                        {/* <Button onClick={showModal}>Buy Now</Button> */}
                       </Space>
                     </div>
                     <div className="description">Read more...</div>
@@ -501,205 +441,8 @@ export interface Item {
         </Row>
       </div>
 
-      <Footer></Footer>
-
-      <>
-        <Modal
-          title="Checkout"
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={false}
-          width={500}
-          okText={"Place Order"}
-        >
-          <Form
-            form={form}
-            layout="vertical"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            // className="custom-form"
-          >
-            {/* //  ******* Customer Info ******** */}
-
-            <Row gutter={[18, 18]}>
-              <Col span={24}>
-                <h2>Customer Info</h2>
-                {/* <Form.Item
-                  label="Email"
-                  name="email"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter email",
-                    },
-                  ]}
-                  initialValue={user?.email}
-                >
-                  <Input></Input>
-                </Form.Item> */}
-              </Col>
-            </Row>
-            <Row>
-              <Col span={24}>
-                <h2>Shipping Address</h2>
-                <Form.Item
-                  label="Full Name"
-                  name="name"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter name",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col span={24}>
-                <Form.Item
-                  label="Street Address"
-                  name="address"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter address",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label="City"
-                  name="city"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter city",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col offset={1} span={11}>
-                <Form.Item
-                  label="State"
-                  name="state"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter state",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label="Country"
-                  name="country"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter country",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col offset={1} span={11}>
-                <Form.Item
-                  label="Zip/Postal Code"
-                  name="zipcode"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter zipcode",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <h2>Shipping Method</h2>
-
-              <Alert
-                message="No shipping methods are available for the address given."
-                type="warning"
-              />
-            </Row>
-            <Row>
-              <StripeCheckoutComponent
-                cartItems={cartItems}
-                couponDetails={Coupon_Code}
-                totalPrice={totalPrice}
-              />
-              <Col span={24}>
-                <h2>Payment Info</h2>
-                <Form.Item
-                  label="Card number"
-                  name="card_number"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter name",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label="Expiry Date"
-                  name="expiry_date"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter expiry date",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col offset={1} span={11}>
-                <Form.Item
-                  label="Security Code"
-                  name="security_code"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter security code",
-                    },
-                  ]}
-                >
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Space>
-                <Form.Item>
-                  <Button onClick={handleCancel}>Cancel</Button>
-                </Form.Item>
-                <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                    Place Order
-                  </Button>
-                </Form.Item>
-              </Space>
-            </Row>
-          </Form>
-        </Modal>
-      </>
+      <Footer/>
+ 
     </>
   );
 };
